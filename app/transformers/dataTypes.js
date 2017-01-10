@@ -24,28 +24,29 @@ const resolver = {
  * @return {String}
  */
 const dataTypeResoler = schema => {
+  const q = x => '`' + x + '`';
   if (schema.getReference()) {
     const name = schema.getReference().match(/\/([^/]*)$/i)[1];
     const link = anchor(name);
-    return `[${name}](#${link})`;
+    return `[${q(name)}](#${link})`;
   }
   if (schema.getType() in resolver) {
     if (schema.getFormat()) {
       return schema.getFormat() in resolver[schema.getType()]
-        ? resolver[schema.getType()][schema.getFormat()]
-        : `${schema.getType()} (${schema.getFormat()})`;
+        ? q(resolver[schema.getType()][schema.getFormat()])
+        : `${q(schema.getType())} (${q(schema.getFormat())})`;
     }
-    return schema.getType();
+    return q(schema.getType());
   }
   if (schema.getFormat()) {
-    return `${schema.getType()} (${schema.getFormat()})`;
+    return `${q(schema.getType())} (${q(schema.getFormat())})`;
   }
   if (schema.getType() === 'array') {
     const subType = dataTypeResoler(schema.getItems());
     return `[ ${subType} ]`;
   }
   if (schema.getType()) {
-    return schema.getType();
+    return q(schema.getType());
   }
   return '';
 };

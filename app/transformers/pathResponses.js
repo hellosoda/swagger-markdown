@@ -12,7 +12,7 @@ module.exports = responses => {
   Object.keys(responses).map(response => {
     const line = [];
     // Response
-    line.push(response);
+    line.push(`\`${response}\``);
     // Description
     const description =
       responses[response].description.replace(/[\r\n]/g, ' ');

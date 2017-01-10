@@ -10,7 +10,7 @@ module.exports = (parameters, pathParameters) => {
     if (keys) {
       const line = [];
       // Name first
-      line.push(keys.name || '');
+      line.push(keys.name && `\`${keys.name}\`` || '');
       // Scope (in)
       line.push(keys.in || '');
       // description
