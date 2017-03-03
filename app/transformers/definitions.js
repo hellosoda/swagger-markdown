@@ -14,7 +14,7 @@ const processDefinition = (name, definition) => {
   const linkAnchor = anchor(name);
 
   // Add anchor with name
-  res.push(`### <a name="${linkAnchor}">${name}</a>`);
+  res.push(`### <a name="${linkAnchor}">\`${name}\`</a>`);
   res.push('');
 
   if ('description' in definition) {
